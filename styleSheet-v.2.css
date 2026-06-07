@@ -954,19 +954,20 @@ SERVICE CARDS
     font-size:18px;
     margin-bottom:25px;
     text-align: center;
+    min-height:60px; /* keeps all descriptions same height */
 }
 
 .service-btn{
-    display:inline-flex;
+    /* display:inline-flex; */
+    display: flex;
     justify-content:center;
     align-items:center;
     min-width:230px;
     height:58px;
     background:#b9782e;
     color:white;
-
     border-radius:999px;
-
+    margin:0 auto; /* Centers the button */
     font-size:18px;
     font-weight:500;
 
