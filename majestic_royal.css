@@ -1,0 +1,895 @@
+/* ========================
+RESET
+======================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:#f8f5f0;
+    color:#1f1f1f;
+    line-height:1.6;
+}
+
+img{
+    width:100%;
+    display:block;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:94%;
+    max-width:1600px;
+    margin:auto;
+}
+
+/* ========================
+LOGO ABOVE NAVBAR
+======================== */
+
+.logo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    color:white;
+    font-family:'Playfair Display',serif;
+    font-size:30px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.logo span{
+    font-size:12px;
+    letter-spacing: 5px;
+    font-weight:600;
+}
+
+.logo-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding-top:20px;
+    padding-bottom:10px;
+}
+
+.logo img{
+    height: 55px;
+    width:auto;
+    display:block;
+}
+
+/* ========================
+NAVBAR
+======================== */
+
+nav{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:10px 0;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:35px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:white;
+    font-weight:500;
+    position:relative;
+    transition:.3s;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:#dfa52a;
+    transition:.3s;
+} 
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-logo{
+    margin:0 20px;
+}
+
+.nav-logo img{
+    height:90px;
+    width:auto;
+    display:block;
+    transition:0.3s ease;
+}
+
+.menu{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+    color:white;
+}
+
+/* NAV RIGHT */
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+/* CART ICON */
+.cart-icon{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:var(--accent);
+    color:white;
+    padding:10px 14px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.cart-icon:hover{
+    transform:translateY(-2px);
+    opacity:0.9;
+}
+
+/* ========================
+   NAV UTILITY ICONS
+   ======================== */
+
+.nav-right{
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: white;    /* default color: #c6a96b; Your Gold Color */
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: transform 0.3s ease, opacity 0.3s;
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
+}
+
+/* Cart Badge Styling */
+.cart-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #111;  /* Dark background for the number */
+    color: white;
+    font-size: 9px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+/* SLIDER NAVIGATION ARROWS */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px; /* Distance from the edges */
+    z-index: 20;
+    pointer-events: none; /* Allows clicking items behind the container */
+}
+
+.nav-arrow {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: auto; /* Re-enables clicking for the buttons */
+    transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+    background: #c6a96b; /* Brand Gold */
+    border-color: #c6a96b;
+    transform: scale(1.1);
+}
+
+/* ===================================
+NAVBAR - THE FANCY STUFF & MEGA MENU
+====================================== */
+
+/* Align text and arrow */
+#colLink,
+#accLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1;
+}
+
+/* Default Arrow State (Pointing UP as requested) */
+.arrow-icon {
+    transition: transform 0.3s ease; /* Smooth animation */
+    transform: rotate(0deg); /* Default upward */
+}
+
+/* ACTIVE STATE (Pointing DOWN when clicked) */
+/* We target the arrow inside the link when the menu has the 'active' class */
+#colMenu.active ~ #colLink .arrow-icon,
+.dropdown:has(#colMenu.active) .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* ACTIVE STATE FOR BOTH ARROWS */
+#colMenu.active ~ #colLink .arrow-icon,
+.dropdown:has(#colMenu.active) .arrow-icon,
+#accMenu.active ~ #accLink .arrow-icon,
+.dropdown:has(#accMenu.active) .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Ensure the arrow changes color when the header is scrolled */
+header.scrolled .arrow-icon {
+    color: #bb983a;
+}
+
+/* MEGA MENU BASE */
+.mega-menu {
+    position: fixed; /* Fixed relative to the screen, not the link */
+    top: 110px; /* Adjust based on your header height */
+    left: 0;
+    width: 100vw;
+    background: rgb(0, 0, 0);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    padding: 40px 0;
+    z-index: 1000;
+    
+    /* Hidden state */
+    /* display: none; */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+
+/* Transition States */
+    opacity: 0;
+    visibility: hidden; /* Menu exists but is non-interactive */
+    transform: translateY(-15px); /* Starts slightly higher */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Smooth "out" curve */
+    pointer-events: none; /* Prevents clicking menu items while hidden */
+}
+
+/* Active State */
+.mega-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Slides down into place */
+    pointer-events: auto; /* Re-enables clicking */
+}
+
+/* Optional: Add a slight delay to the images for a "staggered" feel */
+.mega-menu.active .mega-item {
+    animation: fadeInItem 0.5s ease forwards;
+}
+
+@keyframes fadeInItem {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Show state */
+.mega-menu.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* THE GRID SYSTEM */
+.mega-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+    gap: 25px;
+}
+
+/* INDIVIDUAL ITEM */
+.mega-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.mega-item img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px; /* Rounded corners like your screenshot */
+}
+
+.mega-item span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff !important;
+}
+
+.mega-item:hover {
+    transform: scale(1.02);
+}
+
+/* Adjust top position when header shrinks on scroll */
+header.scrolled .mega-menu {
+    /* top: 65px; */
+    top: 110px;
+}
+
+/* Scroll text color */
+header.scrolled .logo,
+header.scrolled .nav-links a,
+header.scrolled .menu{
+color: #dfa52a;
+/*Default color:#c6a96b; New color 1: #bb983a*/
+}
+/* Ensure icons turn white/black if you want them to change on scroll */
+header.scrolled .icon-btn {
+    color: #dfa52a; /* Keeps them gold even on scroll */
+}
+/* header.scrolled .nav-logo img{
+    height: 65px;
+}*/
+
+
+/* ========================
+PRODUCTS
+======================== */
+.products{
+/* padding:100px 0; */
+padding: 20px 0 100px; /* Reduced top padding from 100px to 20px */
+}
+
+.title{
+text-align:center;
+margin-bottom:11px;
+}
+
+.title h2{
+font-family:'Playfair Display',serif;
+font-size:48px;
+margin-bottom:10px;
+}
+
+.product-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:28px 30px; /* Adjusting vertical gap betwee ncards if needed */
+margin-top: 20px; /* Small margin to keep it clean but close */
+}
+
+.card{
+background:#140c01;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.06);
+transition:.3s;
+color: white;
+}
+
+/* .card:hover{
+transform:translateY(-15px);
+} */
+
+.card img{
+height:240px;
+object-fit:cover;
+}
+
+.card-body{
+padding:22px;
+}
+
+.card h3{
+margin-bottom:8px;
+}
+
+.price{
+color:#c6a96b;
+font-weight:700;
+margin-bottom:14px;
+}
+
+/* ========================
+PRODUCTS TITLE SECTION
+======================== */
+.title {
+    display: flex;
+    justify-content: space-between; /* Pushes title left and button right */
+    align-items: flex-end;         /* Aligns button with the bottom of the text */
+    margin-bottom: 55px;
+    text-align: left;              /* Ensures text itself is left-aligned */
+}
+
+.title-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    margin-bottom: 0;              /* Removed margin to let flex handle spacing */
+}
+
+.title p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+/* Optional: Adjust button size to match your mockup */
+.title .btn-white {
+    padding: 12px 24px;
+    height: fit-content;
+}
+
+/* ========================
+   NEW FILTER STYLES
+   ======================== */
+.filter-section {
+    margin-bottom: 30px;
+}
+
+/* Category Pills */
+.category-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.pill {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    background: #f1e9df; /* Soft beige from your image */
+    color: #1f1f1f;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pill:hover, .pill.active {
+    background: #e5d5c0;
+    font-weight: 600;
+}
+
+/* Filter Bar */
+/* .filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+}
+
+.filter-group {
+    display: flex;
+    gap: 25px;
+}
+
+.filter-group select {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+}
+
+/* The Black Filter Button */
+/* .btn-all-filters {
+    background: #111;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.product-count {
+    font-size: 13px;
+    color: #888;
+    margin-top: 10px;
+} */
+
+/* Adjusted Product Card for the "Discount Tag" look */
+.card {
+    position: relative; /* Allows positioning the % tag */
+}
+
+.discount-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* =========================
+PREMIUM HERO CAROUSEL
+========================= */
+.hero-carousel{
+    position:relative;
+    padding:140px 0 20px; /* Reduced bottom padding from 80px to 20px */
+    overflow:hidden;
+    background:#f5f1eb;
+}
+
+/* TRACK */
+.carousel-track{
+    display:flex;
+    gap:30px;
+    padding:0 120px;
+    transition:1.5s ease;
+}
+
+/* SLIDES */
+.slide{
+    position:relative;
+    min-width:100%;
+    height:700px;
+    border-radius:30px;
+    overflow:hidden;
+    flex-shrink:0;
+
+    opacity:0.45;
+    transform:scale(0.92);
+    transition:0.5s ease;
+}
+
+/* ACTIVE SLIDE */
+.slide.active{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* IMAGE */
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* OVERLAY */
+.slide::before{
+    content:'';
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(255,255,255,0.78) 0%,
+    rgba(255,255,255,0.4) 35%,
+    rgba(0,0,0,0.08) 100%
+    );
+}
+
+/* TEXT CONTENT */
+.slide-overlay{
+    position:absolute;
+    left:80px;
+    top:50%;
+    transform:translateY(-50%);
+    max-width:420px;
+    z-index:2;
+}
+
+.slide-overlay span{
+    font-size:18px;
+    color:#444;
+    display:block;
+    margin-bottom:12px;
+}
+
+.slide-overlay h2{
+    font-family:'Playfair Display', serif;
+    font-size:72px;
+    line-height:1;
+    margin-bottom:18px;
+    color:#1f1f1f;
+}
+
+.slide-overlay p{
+    font-size:22px;
+    margin-bottom:30px;
+    color:#444;
+}
+
+/* BUTTON */
+.slide-btn{
+    display:inline-block;
+    padding:16px 34px;
+    background:#eab8b2;
+    color:#1f1f1f;
+    border-radius:50px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.slide-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* ARROWS */
+.carousel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:56px;
+    height:56px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255, 255, 255, 0.425);
+    cursor:pointer;
+    font-size:24px;
+    z-index:20;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.prev{
+    left:40px;
+}
+
+.next{
+    right:40px;
+}
+
+/* DOTS */
+.carousel-dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:30px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#ddd;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.dot.active{
+    width:36px;
+    border-radius:20px;
+    background:#ff4d4d;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .carousel-track{
+    padding:0 20px;
+    }
+
+    .slide{
+    min-width:100%;
+    height:500px;
+    }
+
+    .slide-overlay{
+    left:40px;
+    max-width:300px;
+    }
+
+    .slide-overlay h2{
+    font-size:48px;
+    }
+
+    .carousel-btn{
+        display:none;
+    }
+}
+
+/* ========================
+ABOUT
+======================== */
+.about{
+padding:100px 0;
+background:white;
+}
+
+.about-wrap{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.about h2{
+font-family:'Playfair Display',serif;
+font-size:46px;
+margin-bottom:18px;
+}
+
+/* ========================
+TESTIMONIAL
+======================== */
+.testimonial{
+padding:100px 0;
+text-align:center;
+}
+
+.quote{
+font-family:'Playfair Display',serif;
+font-size:30px;
+max-width:700px;
+margin:auto;
+margin-bottom:10px;
+}
+
+/* ========================
+CTA & FOOTER
+======================== */
+.cta{
+    padding:90px 0;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+.cta h2{
+    font-family:'Playfair Display',serif;
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+footer {
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
+                url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200');
+    background-size: cover;
+    background-position: bottom;
+    color: #eee;
+    padding: 80px 0 0 0; /* Extra padding top for luxury feel */
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-bottom: 60px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-col h4 {
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: #c6a96b; /* Gold accent for headers */
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: #bbb;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: white;
+}
+
+.footer-col p {
+    font-size: 14px;
+    color: #bbb;
+    margin-bottom: 10px;
+    line-height: 1.8;
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 25px 0;
+    font-size: 13px;
+    background: rgba(0,0,0,0.3);
+    color: #c6a96b;
+}
+
+.flex-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.legal-links a {
+    margin: 0 10px;
+    color: #888;
+}
+
+/* Social Icons Placeholder styling */
+.social-icons a {
+    font-size: 20px;
+    margin-right: 15px;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    opacity: 1;
+    color: #c6a96b;
+}
+
+/* ========================
+SCROLL REVEAL
+======================== */
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
